@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+<script>
+        //for country code mobile
+
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "IN",
+            separateDialCode: true,
+            utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+
+        $(document).ready(function(){
+            $('#code').val('+'+phoneInput.s.dialCode);
+            //for end country code mobile
+            const errorMap = [":- Invalid phone number", ":- Invalid country code", ":- Phone Number is Too short", ":- Phone Number is Too long", ":- Invalid phone number"];
+            $('#phone').keyup(function(){
+
+                $('#code').val('+'+phoneInput.s.dialCode);
+
+            });
+
+            $('.iti__flag-container').click(function(){
+                $('#code').val('+'+phoneInput.s.dialCode);
+            });
+        });
+
+    </script>
