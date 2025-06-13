@@ -21,3 +21,4 @@ Route::get('/', function () {
 
 // Frontant Route 
 Route::get('/register',[AuthController::class,'register'])->name('register');
+Route::post('/authregister',[AuthController::class,'authregister'])->name('authregister');

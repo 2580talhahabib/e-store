@@ -41,7 +41,11 @@
 *::after {
   box-sizing: border-box;
 }
-
+/* custome css  */
+.iti{
+  width: 100%;
+}
+/* end custom css  */
 html {
   font-family: sans-serif;
   line-height: 1.15;

@@ -22,17 +22,17 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{url('frontant/css/style.css')}}" rel="stylesheet">
+    <link href="{{ url('frontant/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <!-- Topbar Start -->
-  @include('frontant.layout.header')
+ @include('frontant.layout.topbar')
     <!-- Topbar End -->
 
 
     <!-- Navbar Start -->
- @include('frontant.layout.navbar')
+   @include('frontant.layout.navbar')
     <!-- Navbar End -->
 
 
@@ -469,7 +469,7 @@
 
 
     <!-- Vendor Start -->
-    <div class="container-fluid py-5">
+    {{-- <div class="container-fluid py-5">
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
@@ -500,7 +500,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Vendor End -->
 
 
@@ -520,11 +520,11 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script src="{{ url('frontant/mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src="{{ url('frontant/mail/contact.js') }}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ url('frontant/js/main.js') }}"></script>
 </body>
 
 </html>
