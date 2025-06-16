@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/', function () {
 // Frontant Route 
 Route::get('/register',[AuthController::class,'register'])->name('register');
 Route::post('/authregister',[AuthController::class,'authregister'])->name('authregister');
-Route::get('/verify/{token}',[AuthController::class,'sendverificationmail'])->name('sendverificationmail');
+Route::get('/verify/{user}',[VerificationController::class,'verify'])->name('verify');
 
 Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::post('/authlogin',[AuthController::class,'authlogin'])->name('authlogin');

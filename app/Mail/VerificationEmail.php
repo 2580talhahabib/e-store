@@ -14,13 +14,15 @@ class VerificationEmail extends Mailable
     use Queueable, SerializesModels;
  public $msg;
  public $subject;
+ public $user;
     /**
      * Create a new message instance.
      */
-    public function __construct($msg,$subject)
+    public function __construct($msg,$subject,$user)
     {
         $this->msg=$msg;
        $this->subject=$subject;
+       $this->user=$user;
     }
 
     /**

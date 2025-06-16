@@ -147,6 +147,7 @@
         </div>
     </div>
     <!-- Navbar End -->
+    @include('frontant.layout.message')
 {{-- Registration Form  --}}
  <h1 class="text-center my-2 text-bold">Register </h1>
 <form  action="{{route('authregister') }}" method="POST">
