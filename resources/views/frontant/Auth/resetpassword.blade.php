@@ -150,35 +150,35 @@
     @include('frontant.layout.message')
 {{-- Registration Form  --}}
  <h1 class="text-center my-2 text-bold">Login </h1>
-<form  action="{{ route('authlogin') }}" method="POST">
+<form  action="{{ route('authrestepassword')  }}" method="POST">
     @csrf
     <div class="container">
-
+<input type="hidden" name="id" value="{{$user->id}}">
     <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
-  </div>
-    @error('email')
-      <div class="text text-danger">
-        {{ $message }}
-      </div>
-  @enderror
-
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="exampleInputEmail1">New Password</label>
+    <input type="password" name="password" value="{{ old('password') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
   </div>
     @error('password')
       <div class="text text-danger">
         {{ $message }}
       </div>
   @enderror
+  <div class="form-group">
+    <label for="exampleInputEmail1">Password Confirmation</label>
+    <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your confirm password">
+  </div>
+    @error('confirm_password')
+      <div class="text text-danger">
+        {{ $message }}
+      </div>
+  @enderror
 
-  <button type="submit" class="btn btn-primary">Login</button>
+
+  <button type="submit" class="btn btn-primary">Reset</button>
     </div>
 
 </form>
-  <a href="{{ route('forgotpassword') }}" class="btn btn-primary my-3 ml-5">Forgot Password</a>
+ 
 
   
     <!-- Footer Start -->
