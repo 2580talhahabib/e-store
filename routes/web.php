@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AppController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\IndexController;
@@ -45,7 +46,6 @@ Route::middleware(['OnlyAuthenticated'])->group(function () {
 })->name('user.dashboard');
 });
 Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
-  Route::get('/admin/dashboard', function () {
-     echo "Admin login";
-})->name('admin.dashboard');
+     Route::get('/admin/dashboard', [AppController::class, 'index'])->name('admin.dashboard');
+
 });
