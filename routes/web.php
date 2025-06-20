@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\IndexController;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,9 @@ Route::get('/', function () {
 
 
 // Frontant Route 
-Route::get('/register',[AuthController::class,'register'])->name('register');
+
+Route::middleware(['IsAuthenticated'])->group(function () {
+  Route::get('/register',[AuthController::class,'register'])->name('register');
 Route::post('/authregister',[AuthController::class,'authregister'])->name('authregister');
 Route::get('/verify/{user}',[VerificationController::class,'verify'])->name('verify');
 
@@ -34,7 +37,15 @@ Route::post('/authpassword',[AuthController::class,'authpassword'])->name('authp
 Route::get('/restepassword/{token}',[AuthController::class,'restepassword'])->name('restepassword');
 Route::post('/authrestepassword',[AuthController::class,'authrestepassword'])->name('authrestepassword');
 Route::get('/password-updated',[AuthController::class,'passwordupdated'])->name('passwordupdated');
+});
 
-
-Route::get('/admin/dashboard',[IndexController::class,'index'])->name('admin.dashboard');
-Route::get('/user/dashboard',[IndexController::class,'index'])->name('user.dashboard');
+Route::middleware(['OnlyAuthenticated'])->group(function () {
+   Route::get('/user/dashboard', function () {
+     echo "User login";
+})->name('user.dashboard');
+});
+Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
+  Route::get('/admin/dashboard', function () {
+     echo "Admin login";
+})->name('admin.dashboard');
+});
