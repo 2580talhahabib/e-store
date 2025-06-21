@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     public function register(){
-       return view('frontant.Auth.register');
+       return view('Auth.register');
     }
     public function authregister(Request $req){
          $req->validate([
@@ -51,7 +51,7 @@ return back()->with('success','you are registered successfully.please check your
     }
   
     public function login(){
-        return view('frontant.Auth.login');
+        return view('Auth.login');
     }
     public function authlogin(Request $req){
              $req->validate([
@@ -77,7 +77,7 @@ return back()->with('success','you are registered successfully.please check your
 
     }
     public function forgotpassword(){
-        return view('frontant.Auth.forgotpassword');
+        return view('Auth.forgotpassword');
     }
     public function authpassword(Request $req){
         $user=User::where('email',$req->email)->first();
@@ -109,7 +109,7 @@ return back()->with('success','you are registered successfully.please check your
             return back()->with('danger','something went wronge');
         }
         $user= User::where('email',$resetData->email)->first();
-        return view('frontant.Auth.resetpassword',compact('user'));
+        return view('Auth.resetpassword',compact('user'));
 }
     public function authrestepassword(Request $req){
         $req->validate([
@@ -123,6 +123,6 @@ return back()->with('success','you are registered successfully.please check your
         return redirect()->route('passwordupdated');
     }
     public function passwordupdated(){
-        return view('frontant.Auth.password-updated');
+        return view('Auth.password-updated');
     }
 }

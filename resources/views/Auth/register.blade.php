@@ -1,7 +1,7 @@
-@extends('frontant.layout.auth.app')
+@extends('layout.auth.app')
 @section('frontant-content')
       <!-- Navbar End -->
-    @include('frontant.layout.message')
+    @include('layout.auth.message')
 {{-- Registration Form  --}}
  <h1 class="text-center my-2 text-bold">Register </h1>
 <form  action="{{route('authregister') }}" method="POST">

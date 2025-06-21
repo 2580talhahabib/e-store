@@ -4,9 +4,9 @@
 					  <i class="fa fa-bars"></i>
 					  <span class="sr-only">Toggle Menu</span>
 					</button>
-				</div>
+				</div >
 					<h1><a href="index.html" class="logo">Project Name</a></h1>
-				<ul class="list-unstyled components mb-5">
+				<ul class="list-unstyled components mb-5 ">
 				  <li class="active">
 					<a href="#"><span class="fa fa-home mr-3"></span> Homepage</a>
 				  </li>

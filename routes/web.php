@@ -46,6 +46,9 @@ Route::middleware(['OnlyAuthenticated'])->group(function () {
 })->name('user.dashboard');
 });
 Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
+  // app data route 
      Route::get('/admin/dashboard', [AppController::class, 'index'])->name('admin.dashboard');
+     Route::post('/updateappdata', [AppController::class, 'updateappdata'])->name('admin.updateappdata');
+     
 
 });
