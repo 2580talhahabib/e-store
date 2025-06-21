@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AppController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MainController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// MainController 
+Route::get('/', [MainController::class, 'index'])->name('index');
 
 
 // Frontant Route 
