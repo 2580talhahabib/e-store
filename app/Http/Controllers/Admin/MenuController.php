@@ -21,22 +21,38 @@ class MenuController extends Controller
         'url' => $req->url,
         'is_extenal' => $req->has('is_extenal'),
         'position' => $req->position,
-        'parent_id' => $req->parent_id,
-    ];
-    
-    $created = Menu::create($data);
-    
-    if ($created) {
-        return response()->json([
-            'status' => true,
-            'message' => "Data Created",
-            'data' => $created 
-        ]);
-    } else {
-        return response()->json([
-            'status' => false,
-            'message' => "Data not created"
-        ], 500);
-    }
+        'parent_id' => $req->parent_id ,
+];
+
+$created = Menu::create($data);
+
+if ($created) {
+return response()->json([
+'status' => true,
+'message' => "Data Created",
+'data' => $created
+]);
+} else {
+return response()->json([
+'status' => false,
+'message' => "Data not created"
+], 500);
+}
+}
+public function destroy($id){
+       $data=Menu::where('id',$id)->first();
+       $deleteid=$data->delete();
+    if (!empty($deleteid)) {
+return response()->json([
+'status' => true,
+'message' => "Data Deleted successfully",
+'data' => $deleteid
+]);
+} else {
+return response()->json([
+'status' => false,
+'message' => "Data not found"
+], 500);
+}
 }
 }
