@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AppController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\IndexController;
@@ -49,7 +50,11 @@ Route::middleware(['OnlyAuthenticated'])->group(function () {
 Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
   // app data route 
      Route::get('/admin/dashboard', [AppController::class, 'index'])->name('admin.dashboard');
-     Route::post('/updateappdata', [AppController::class, 'updateappdata'])->name('admin.updateappdata');
+     Route::post('/admin/updateappdata', [AppController::class, 'updateappdata'])->name('admin.updateappdata');
      
+    //  Menu Controller 
+    
+    Route::get("/admin/menus",[MenuController::class , 'index'])->name('admin.menus');
+    Route::post("/admin/menus/store",[MenuController::class , 'store'])->name('admin.menus.store');
 
 });
