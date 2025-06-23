@@ -55,4 +55,28 @@ return response()->json([
 ], 500);
 }
 }
+public function update(Request $req,$id){
+
+$updateid=Menu::find($id);
+if(!empty($updateid)){
+    $updateid->update([
+        'name' => $req->name,
+        'url' => $req->url,
+         'is_extenal' => $req->has('is_extenal'),
+         'position' => $req->position,
+         'parent_id' => $req->parent_id ,
+    ]);
+    return response()->json([
+'status' => true,
+'message' => "Data Updated",
+]);
+}else{
+    return response()->json([
+'status' => false,
+'message' => "Data not found"
+], 500);
+}
+    
+
+}
 }

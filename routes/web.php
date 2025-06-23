@@ -56,6 +56,7 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
     
     Route::get("/admin/menus",[MenuController::class , 'index'])->name('admin.menus');
     Route::post("/admin/menus/store",[MenuController::class , 'store'])->name('admin.menus.store');
+    Route::post("/admin/menu/update/{id}",[MenuController::class , 'update'])->name('admin.menus.update');
     Route::Delete("/admin/menu/delete/{id}",[MenuController::class , 'destroy'])->name('admin.menus.delete');
 
 });
