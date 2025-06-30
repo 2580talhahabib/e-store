@@ -5,12 +5,13 @@
 					  <span class="sr-only">Toggle Menu</span>
 					</button>
 				</div >
-					<h1><a href="{{ route('admin.dashboard') }}" class="logo">Hi ,Admin</a></h1>
+					<h1 class="text-center  my-3"><a href="{{ route('admin.dashboard') }}" class="text-white ">Hi ,Admin</a></h1>
 				<ul class="list-unstyled components mb-5 ">
-				<li class="active">
-					<a href="{{ route('admin.menus') }}"><span class="fa fa-bars mr-3"></span> Menus</a>
-				  </li>
-				
+					
+				<li class="{{ request()->routeIs('admin.menus') ? 'bg-success' : '' }}">
+                   <a class="" href="{{ route('admin.menus') }}">
+                         <span class="fa fa-bars mr-3"></span> Menus
+                   </a>
+                 </li>
 				</ul>
-
 			</nav>

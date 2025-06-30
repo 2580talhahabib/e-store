@@ -194,10 +194,12 @@
       </td>
       
     </tr>
-        @endforeach
+            @endforeach
     @endif
+
   </tbody>
 </table>
+   {{ $parents->links('pagination::bootstrap-5') }}
     </div>
   </div>
 </div>
@@ -255,11 +257,11 @@
         });
     });
     
-    // Menu edit - populate form
+    // Menu edit 
     $('.updatebtn').click(function(e){
         e.preventDefault();
         var data = $(this).data('obj');
-        currentMenuId = $(this).data('id'); // Store the ID
+        currentMenuId = $(this).data('id'); 
         
         console.log(data);
         $("#name").val(data.name);
@@ -269,7 +271,7 @@
         $("#parent_id").val(data.parent_id);
     });
     
-    // Update form submission
+
     $("#update-data").submit(function(e){
         e.preventDefault();
         $(".update").prop('disabled', true);
@@ -279,7 +281,7 @@
         
         $.ajax({
             url: url,
-            type: 'POST', // Will be converted to PUT via method spoofing
+            type: 'POST', 
             data: $(this).serialize(),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

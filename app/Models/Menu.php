@@ -9,4 +9,16 @@ class Menu extends Model
 {
     use HasFactory;
     protected $guarded=[];
+    public function children(){
+        return $this->hasMany(Menu::class,'parent_id');
+    }
+
+    public function getFullUrlAttribute(){
+        if($this->is_extenal == 1){
+            return $this->url;
+        }
+        return url($this->url);
+    }
+    
+    
 }

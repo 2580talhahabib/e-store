@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\TryCatch;
 class MenuController extends Controller
 {
     public function index(){
-        $parents=Menu::get();
+        $parents=Menu::latest('id')->paginate(10);
         return view('admin.menus',compact('parents'));
     }
  
