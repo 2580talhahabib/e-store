@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AppController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -53,10 +54,14 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
      Route::post('/admin/updateappdata', [AppController::class, 'updateappdata'])->name('admin.updateappdata');
      
     //  Menu Controller 
-    
     Route::get("/admin/menus",[MenuController::class , 'index'])->name('admin.menus');
     Route::post("/admin/menus/store",[MenuController::class , 'store'])->name('admin.menus.store');
     Route::post("/admin/menu/update/{id}",[MenuController::class , 'update'])->name('admin.menus.update');
     Route::Delete("/admin/menu/delete/{id}",[MenuController::class , 'destroy'])->name('admin.menus.delete');
-
+    
+     //  Category Controller 
+    Route::get("/admin/category",[CategoryController::class ,'index'])->name('admin.category');
+    Route::post("/admin/category/store",[CategoryController::class ,'store'])->name('admin.category.store');
+    Route::post("/admin/category/update/{id}",[CategoryController::class ,'update'])->name('admin.category.update');
+    Route::Delete("/admin/category/delete/{id}",[CategoryController::class ,'destroy'])->name('admin.category.delete');
 });

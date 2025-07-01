@@ -1,4 +1,4 @@
-	<nav id="sidebar" >
+	<nav id="sidebar"  >
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
 					  <i class="fa fa-bars"></i>
@@ -11,6 +11,11 @@
 				<li class="{{ request()->routeIs('admin.menus') ? 'bg-success' : '' }}">
                    <a class="" href="{{ route('admin.menus') }}">
                          <span class="fa fa-bars mr-3"></span> Menus
+                   </a>
+                 </li>
+				 <li class="{{ request()->routeIs('admin.category') ? 'bg-success' : '' }}">
+                   <a class="" href="{{ route('admin.category') }}">
+                         <span class="fa fa-list-alt mr-3"></span> Categories
                    </a>
                  </li>
 				</ul>

@@ -218,7 +218,7 @@
         e.preventDefault();
         var formData = $(this).serialize();
         $(".createBtn").prop('disabled', true);
-        
+        // ,_token: "{{ csrf_token() }}"
         $.ajax({
             url: '{{ route("admin.menus.store") }}',
             type: 'POST',
