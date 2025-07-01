@@ -54,7 +54,45 @@
       </div>
     </div>
   </div>
+  <div class="container">
+  <div class="row ml-1 mt-1">
+    <div class="col-md-12">
+{{-- Menus list  --}}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Menu</th>
+      <th scope="col">Parent Category</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if ($categories->isNotEmpty())
+        @foreach ($categories as $category)
+                <tr>
+      <td >{{ $category->id }}</td>
+      <td >{{ $category->name }}</td>
+      <td >{{ $category->children->name }}</td>
+     
+      <td class="text-center">
+        <a class="btn btn-danger text-white deletebtn"   data-toggle="modal" data-target="#deletemenu" data-id="{{ $category->id }}" >Delete</a>
+        <a type="submit"  class="btn btn-secondary text-white updatebtn"  data-toggle="modal" data-target="#updatemenu" data-obj="{{ $category }}" data-id="{{ $category->id }}" >Update</a>
+      </td>
+      
+    </tr>
+            @endforeach
+    @endif
+
+  </tbody>
+</table>
+   {{ $categories->links('pagination::bootstrap-5') }}
+    </div>
+  </div>
 </div>
+</div>
+
 @endsection
 
 @section('admin-script')

@@ -10,6 +10,6 @@ class Category extends Model
     use HasFactory;
     protected $guarded=[];
     public function children(){
-        return $this->hasMany(Category::class,'parent_id');
+        return $this->hasOne(Category::class,'parent_id');
     }
 }
