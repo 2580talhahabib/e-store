@@ -10,9 +10,10 @@ class CategoryController extends Controller
 {
     public function index(){
         try {
-        $categories=Category::with('children')->whereNull('parent_id')->paginate(5);
+        $categorys=Category::whereNull('parent_id')->paginate(10);
+        $categories=Category::with('children')->paginate(10);
         // return $categories;
-        return view('admin.categories',compact('categories'));
+        return view('admin.categories',compact('categories','categorys'));
           
         } catch (\Throwable $th) {
             return response()->json([
