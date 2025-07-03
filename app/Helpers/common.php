@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AppData;
+use App\Models\Category;
 use App\Models\Menu;
 
 function getdata(){
@@ -12,6 +13,15 @@ function getmanu($position){
                   ->whereNull('parent_id')->orderby('id') // Only get parent menus
                   ->get();
         return $menus;
+    } catch (\Throwable $th) {
+        return [];
+    }
+}
+ function getcategories(){
+    try {
+       $categories=Category::with('parent')->whereNull('parent_id')->get();
+       return $categories;
+       
     } catch (\Throwable $th) {
         return [];
     }
