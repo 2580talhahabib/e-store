@@ -63,5 +63,5 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
     Route::get("/admin/category",[CategoryController::class ,'index'])->name('admin.category');
     Route::post("/admin/category/store",[CategoryController::class ,'store'])->name('admin.category.store');
     Route::post("/admin/category/update/{id}",[CategoryController::class ,'update'])->name('admin.category.update');
-    Route::Delete("/admin/category/delete/{id}",[CategoryController::class ,'destroy'])->name('admin.category.delete');
+    Route::Delete("/admin/category/delete",[CategoryController::class ,'destroy'])->name('admin.category.delete');
 });

@@ -49,14 +49,13 @@ class CategoryController extends Controller
         //    abort(404,'Something went wronge');
         // }
     }
-    public function destroy($id){
-       $data=Category::where('id',$id)->first();
-       $deleteid=$data->delete();
-    if (!empty($deleteid)) {
+    public function destroy(Request $req){    
+       $data=Category::where('id',$req->id)->orWhere('parent_id',$req->id)->delete();
+    if (!empty($data)) {
 return response()->json([
 'status' => true,
 'message' => "Category Deleted successfully",
-'data' => $deleteid
+'data' => $data
 ]);
 } else {
 return response()->json([

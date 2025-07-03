@@ -61,15 +61,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form  id="menu-data">
-
-        <input type="hidden">
+      <form  id="categorydelete" >
+        @csrf
+        @method('DELETE')
+<input type="hidden" id="deletecategoryid" name="id">
+  
       <div class="modal-body">
      <p>Are you sure you want to delete the Category</p>    
       </div>  
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger confirm_delete">Delete</button>
+        <button type="submit" class="btn btn-danger ">Delete</button>
       </div>
       </form>
     </div>
@@ -197,14 +199,16 @@
     $(".deletebtn").click(function(e){
         e.preventDefault();
         var currentId = $(this).data('id');
+        var id=$("#deletecategoryid").val(currentId);
         
-        $(".confirm_delete").click(function(e){
+        $("#categorydelete").submit(function(e){
             e.preventDefault();
-            if(currentId > 0){
-                var url = "{{ route('admin.category.delete', 'id') }}".replace('id', currentId);
+ var formData= $(this).serialize();
+                // var url = "{{ route('admin.category.delete', 'id') }}".replace('id', currentId);/
                 $.ajax({
-                    url: url,
+                    url: "{{route('admin.category.delete')}}",
                     type: 'DELETE',
+                    data:formData,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -212,7 +216,6 @@
                         location.reload();
                     }    
                 });
-            }
         });
     });
     
