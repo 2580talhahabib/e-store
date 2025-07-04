@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AppController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Auth\AuthController;
@@ -64,4 +65,10 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
     Route::post("/admin/category/store",[CategoryController::class ,'store'])->name('admin.category.store');
     Route::post("/admin/category/update/{id}",[CategoryController::class ,'update'])->name('admin.category.update');
     Route::Delete("/admin/category/delete",[CategoryController::class ,'destroy'])->name('admin.category.delete');
+
+      //  Banner Controller 
+    Route::get("/admin/banner",[BannerController::class ,'index'])->name('admin.banner');
+    Route::post("/admin/banner/store",[BannerController::class ,'store'])->name('admin.banner.store');
+    Route::post("/admin/banner/update/{id}",[BannerController::class ,'update'])->name('admin.banner.update');
+    Route::Delete("/admin/banner/delete",[BannerController::class ,'destroy'])->name('admin.banner.delete');
 });

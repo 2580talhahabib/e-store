@@ -123,8 +123,6 @@
                                 @foreach ($category->parent as $child)
                                 <a href="" class="dropdown-item">{{ $child->name }}</a>
                                 @endforeach
-                                {{-- <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a> --}}
                             </div>
                         </div>
                        @else
@@ -133,15 +131,6 @@
                        @endif
                            
                         @endforeach
-                     
-                        {{-- <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a> --}}
                     </div>
                 </nav>
             </div>
