@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AppData;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Menu;
 
@@ -25,4 +26,13 @@ function getmanu($position){
     } catch (\Throwable $th) {
         return [];
     }
+   
 }
+ function getbanners(){
+    try {
+       $banners=Banner::where('status',1)->get();
+       return $banners;
+    } catch (\Throwable $th) {
+        return [];
+    }
+    }

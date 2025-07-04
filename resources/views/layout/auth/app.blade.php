@@ -112,7 +112,7 @@
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                <nav class="{{ (request()->is('/user/dashboard')) ? 'show' : ''}} position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
 
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                         @foreach (getcategories() as $category )
@@ -165,10 +165,11 @@
                         </div>
                     </div>
                 </nav>
+                @yield('frontant-content')
             </div>
         </div>
     </div>
-    @yield('frontant-content')
+    
 
     
     <!-- Footer Start -->

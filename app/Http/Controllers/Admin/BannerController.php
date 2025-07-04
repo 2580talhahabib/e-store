@@ -88,6 +88,10 @@ public function update(Request $req){
 // dd($req->all());
    $filename="";
         $update=Banner::find($req->id);
+         if($req->has('image')){
+             if($update->image && file_exists(public_path($update->image))) {
+           unlink($update->image) ;
+        }
 // dd($update);
         if($req->has('image')){
                 $image = $req->file('image');
@@ -120,6 +124,7 @@ if(!empty($updatedata)){
 'status' => false,
 'message' => "Banner not found"
 ], 500);
+}
 }
 }
 }
