@@ -84,22 +84,41 @@ return response()->json([
 ], 500);
 }
 }
-public function update(Request $req,$id){
+public function update(Request $req){
+// dd($req->all());
+   $filename="";
+        $update=Banner::find($req->id);
+// dd($update);
+        if($req->has('image')){
+                $image = $req->file('image');
+                $ext=$image->getClientOriginalExtension();
+                $filename=time().".".$ext;
+                $updload=public_path('uploads/banners');
+                $image->move($updload,$filename);
+                $filename='uploads/banners/'.$filename;
+            }
+  $updatedata=  $update->update([
+                'image'=>$filename,
+                'paragraph'=>$req->paragraph,
+                'heading'=>$req->heading,
+                'btn_text'=>$req->btn_text,
+                'link'=>$req->link,
+                'status'=>$req->status,
+        ]);
+    
+        
 
-$updateid=Banner::find($id);
-if(!empty($updateid)){
-    $updateid->update([
-        'name' => $req->name,
-         'parent_id' => $req->parent_id ,
-    ]);
+if(!empty($updatedata)){
+   
     return response()->json([
 'status' => true,
-'message' => "Category Updated",
+'message' => "Banner Updated successfully",
+'banner'=>$updatedata,
 ]);
 }else{
     return response()->json([
 'status' => false,
-'message' => "Category not found"
+'message' => "Banner not found"
 ], 500);
 }
 }
