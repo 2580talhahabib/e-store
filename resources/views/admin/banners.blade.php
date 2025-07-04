@@ -13,7 +13,7 @@
 </button>
 
 
-<!-- Modal -->
+<!-- Create Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -65,22 +65,53 @@
     </div>
   </div>
 </div>
-
             </div>
         </div>
     </div>
-     <div class="row">
+
+
+
+
+
+<!-- Delete modal -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  id="deleteform">
+        @csrf
+        @method('DELETE')
+      <div class="modal-body">
+        <input type="text" name="id" id="iddelete">
+       <p>Are you sure you want to delete the Banner</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger ">Delete</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+       <div class="row">
    <div class="col-md-12 my-2">
     <table class="table table-striped ">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Image</th>
-      <th scope="col">Paragraph</th>
+      {{-- <th scope="col">Paragraph</th>
       <th scope="col">Heading</th>
-      <th scope="col">Button Text</th>
+      <th scope="col">Button Text</th> --}}
       <th scope="col">Link</th>
       <th scope="col">Status</th>
+      <th scope="col" class="text-center">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -90,11 +121,15 @@
       <th scope="row">{{ $banner->id }}</th>
       {{-- {{ dd(url('uploads/banners/'.$banner->image)) }} --}}
       <td><img src="{{ url($banner->image) }}" width="100px" height="100px" alt="{{ $banner->paragraph }}"></td>
-      <td>{{ $banner->paragraph }}</td>
+      {{-- <td>{{ $banner->paragraph }}</td>
       <td>{{ $banner->heading }}</td>
-      <td>{{ $banner->btn_text }}</td>
+      <td>{{ $banner->btn_text }}</td> --}}
       <td>{{ $banner->link }}</td>
      <td>{{ $banner->status == 1 ? 'Enable' : 'Disable' }}</td>
+     <td class="d-flex ">
+      <a href="#" class="btn btn-success m-1">Update</a>
+      <button class="btn btn-danger m-1 deletebtn" data-toggle="modal" data-target="#deletemodal"   data-id="{{ $banner->id }}">Delete</button>
+     </td>
       
     </tr>
         @endforeach
@@ -104,13 +139,14 @@
 </table>
    </div>
   </div>
-
+</div>
 </div>
 
  
 @endsection
 @section('admin-script')
     <script>
+      // submit banner 
         $(document).ready(function(){
             $("#formdata").submit(function(e){
                e.preventDefault();
@@ -131,6 +167,48 @@
                 },
                })
             })
+
+//  delete banner 
+$(".deletebtn").click(function(e){
+e.preventDefault();
+var deleteid=$(this).data('id');
+$("#iddelete").val(deleteid);
+
+
+
+})
+
+$("#deleteform").submit(function(e){
+e.preventDefault();
+const formData=$(this).serialize();
+console.log(formData);
+$.ajax({
+  url:'{{ route('admin.banner.delete') }}',
+  type:'DELETE',
+  data:formData,
+   headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+success: function(response) {
+    // Create alert element
+    const alert = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+        ${response.message}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>`;
+    
+    // Prepend to container
+    $('.container').prepend(alert);
+    
+    // Reload after delay
+    setTimeout(() => {
+        location.reload();
+    }, 2000);
+}
+})
+})
+
         })
     </script>
 @endsection

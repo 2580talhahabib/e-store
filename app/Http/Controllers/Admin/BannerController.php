@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
@@ -63,23 +64,29 @@ class BannerController extends Controller
         // }
     }
     public function destroy(Request $req){    
-       $data=Category::where('id',$req->id)->orWhere('parent_id',$req->id)->delete();
-    if (!empty($data)) {
+        // dd($req->all());
+       $banner=Banner::where('id',$req->id)->first();
+        if($banner->image){
+                File::delete($banner->image);
+            }
+       $banner->delete();
+      
+    if (!empty($banner)) {
 return response()->json([
 'status' => true,
-'message' => "Category Deleted successfully",
-'data' => $data
+'message' => "Banner Deleted successfully",
+'data' => $banner,
 ]);
 } else {
 return response()->json([
 'status' => false,
-'message' => "Category not found"
+'message' => "Banner not found"
 ], 500);
 }
 }
 public function update(Request $req,$id){
 
-$updateid=Category::find($id);
+$updateid=Banner::find($id);
 if(!empty($updateid)){
     $updateid->update([
         'name' => $req->name,
