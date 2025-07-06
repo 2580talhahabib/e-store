@@ -78,22 +78,20 @@ class VariationController extends Controller
     }
     public function destroy(Request $req){    
         // dd($req->all());
-       $banner=Banner::where('id',$req->id)->first();
-        if($banner->image){
-                File::delete($banner->image);
-            }
-       $banner->delete();
+       $variations=Variation::where('id',$req->delete_variation_id)->first();
+       
+       $variations->delete();
       
-    if (!empty($banner)) {
+    if (!empty($variations)) {
 return response()->json([
 'status' => true,
-'message' => "Banner Deleted successfully",
-'data' => $banner,
+'message' => "Variation Deleted successfully",
+'data' => $variations,
 ]);
 } else {
 return response()->json([
 'status' => false,
-'message' => "Banner not found"
+'message' => "variations not found"
 ], 500);
 }
 }

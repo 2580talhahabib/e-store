@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('url');
             $table->integer('is_extenal')->default(0)->comment("1=>Yes,0=>No");
             $table->string('position');
-            $table->foreignId('parent_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained('menus')->cascadeOnDelete();
             $table->timestamps();
         });
     }

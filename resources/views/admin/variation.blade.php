@@ -12,7 +12,31 @@
   Create variation
 </button>
 
+{{-- delete variation model  --}}
 
+<div class="modal fade" id="deletemodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete <span class="valuetitle"></span> Variation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+          <form id="deleteformvariation" >
+      <div class="modal-body">
+        <input type="text" name="delete_variation_id" id="delete_variation_id">
+        <p>Are you sure you want to delete the Variation</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger deletevariation">Delete</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
 <!-- Create Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -111,10 +135,10 @@
       <td>
         <button class="btn btn-secondary addvalue" data-toggle="modal" data-target="#valuemodel" data-id="{{ $variation->id }}" data-name="{{ $variation->name }}" >Add Value</button>
       </td>
-     {{-- <td class="d-flex ">
+     <td class="d-flex ">
       <a href="#" class="btn btn-success m-1 updatebtn" data-obj="{{ $variation }}"   data-toggle="modal" data-target="#updatemodal">Update</a>
-      <button class="btn btn-danger m-1 deletebtn" data-toggle="modal" data-target="#deletemodal"   data-id="{{ $variation->id }}">Delete</button>
-     </td> --}}
+      <button class="btn btn-danger m-1 deletebtn" data-toggle="modal" data-target="#deletemodel"   data-id="{{ $variation->id }}">Delete</button>
+     </td>
       
     </tr>
         @endforeach
@@ -211,6 +235,28 @@ $.ajax({
   }
 })
 }
+})
+
+// Delete Variation 
+$(".deletebtn").click(function(e){
+e.preventDefault();
+var id=$(this).data('id');
+$("#delete_variation_id").val(id);
+$("#deleteformvariation").submit(function(e){
+e.preventDefault();
+$.ajax({
+url:'{{ route('admin.variation.delete') }}',
+type:'DELETE',
+data:$(this).serialize(),
+    headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+  success:function(response){
+alert(response.message);
+location.reload();
+  }
+})
+})
 })
 
 })
