@@ -12,6 +12,36 @@
   Create variation
 </button>
 
+{{-- update variation model  --}}
+
+<div class="modal fade" id="updatemodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update <span class="valuetitle"></span> Variation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+          <form id="updatedata" >
+      <div class="modal-body">
+        <input type="text" name="id" id="update_id">
+         <div class="form-group">
+            <label for="" class="form-label">Name:</label>
+            <input type="text" class="form-control"  name="name" id="updatename">
+            <p></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary ">Save changes</button>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
 {{-- delete variation model  --}}
 
 <div class="modal fade" id="deletemodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -136,8 +166,8 @@
         <button class="btn btn-secondary addvalue" data-toggle="modal" data-target="#valuemodel" data-id="{{ $variation->id }}" data-name="{{ $variation->name }}" >Add Value</button>
       </td>
      <td class="d-flex ">
-      <a href="#" class="btn btn-success m-1 updatebtn" data-obj="{{ $variation }}"   data-toggle="modal" data-target="#updatemodal">Update</a>
-      <button class="btn btn-danger m-1 deletebtn" data-toggle="modal" data-target="#deletemodel"   data-id="{{ $variation->id }}">Delete</button>
+      <a href="#" class="btn btn-success m-1 updatebtn" data-id="{{ $variation->id }}" data-name="{{ $variation->name }}"   data-toggle="modal" data-target="#updatemodel">Update</a>
+      <button class="btn btn-danger m-1 deletebtn" data-toggle="modal" data-target="#deletemodel" data-name="{{ $variation->name }}"  data-id="{{ $variation->id }}">Delete</button>
      </td>
       
     </tr>
@@ -258,6 +288,33 @@ location.reload();
 })
 })
 })
+
+// update Variation model 
+$(".updatebtn").click(function(e){
+e.preventDefault();
+var updateid=$(this).data('id');
+var updatename=$(this).data('name');
+console.log(updatename)
+$('#update_id').val(updateid);
+$('#updatename').val(updatename);
+})
+
+$("#updatedata").submit(function(e){
+  e.preventDefault();
+  $.ajax({
+  url:'{{ route('admin.variation.update') }}',
+  type:'POST',
+  data:$(this).serialize(),
+   headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+   success:function(response){
+  alert(response.message);
+  location.reload();
+   }
+})
+})
+
 
 })
 

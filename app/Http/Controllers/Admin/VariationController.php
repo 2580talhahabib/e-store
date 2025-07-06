@@ -97,28 +97,13 @@ return response()->json([
 }
 public function update(Request $req){
 // dd($req->all());
-   $filename=null;
-        $update=Banner::find($req->id);
-         if($req->has('image')){
-             if($update->image && file_exists(public_path($update->image))) {
-           unlink($update->image) ;
-        }
+ 
+        $update=Variation::find($req->id);
+        
 // dd($update);
-        if($req->has('image')){
-                $image = $req->file('image');
-                $ext=$image->getClientOriginalExtension();
-                $filename=time().".".$ext;
-                $updload=public_path('uploads/banners');
-                $image->move($updload,$filename);
-                $filename='uploads/banners/'.$filename;
-            }
+       
   $updatedata=  $update->update([
-                'image'=>$filename,
-                'paragraph'=>$req->paragraph,
-                'heading'=>$req->heading,
-                'btn_text'=>$req->btn_text,
-                'link'=>$req->link,
-                'status'=>$req->status,
+           'name'=>$req->name,
         ]);
     
         
@@ -127,15 +112,15 @@ if(!empty($updatedata)){
    
     return response()->json([
 'status' => true,
-'message' => "Banner Updated successfully",
+'message' => "Vairation Updated successfully",
 'banner'=>$updatedata,
 ]);
 }else{
     return response()->json([
 'status' => false,
-'message' => "Banner not found"
+'message' => "Variation not found"
 ], 500);
 }
 }
-}
+
 }
