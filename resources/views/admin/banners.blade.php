@@ -116,7 +116,7 @@
        <input type="text" name="id" id="updateid" >
             <div class="form-group">
             <label for="" class="form-label">Select Banner:</label>
-            <input type="file" class="form-control" name="image" id="image" >
+            <input type="file" class="form-control" name="image" id="image" required >
         </div>
             <div class="form-group">
             <label for="" class="form-label">Paragraph:</label>

@@ -3,65 +3,78 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
+use App\Models\Variation;
+use App\Models\VariationValues;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
-class BannerController extends Controller
+class VariationController extends Controller
 {
     public function index(){
         try {
-        $banners=Banner::paginate(10);
-        return view('admin.banners',compact('banners'));
+        $variations=Variation::with('value')->paginate(10);
+    // return $variations;
+        return view('admin.variation',compact('variations'));
           
         } catch (\Throwable $th) {
-            return response()->json([
-                'status'=>true,
-                'error'=>$th->getMessage(),
-            ]);
+           return abort(404,'Some thing went wronge');
         }
     }
     public function store(Request $req){
         // dd($req->all());
         // try {
-            $req->validate([
-                'image'=>'required|image',
-                'heading'=>'required',
-            ]);
-            $filename="";
-            if($req->has('image')){
-                $image = $req->file('image');
-                $ext=$image->getClientOriginalExtension();
-                $filename=time().".".$ext;
-                $updload=public_path('uploads/banners');
-                $image->move($updload,$filename);
-                $filename='uploads/banners/'.$filename;
-            }
-            $banner=Banner::create([
-                'image'=>$filename,
-                'paragraph'=>$req->paragraph,
-                'heading'=>$req->heading,
-                'btn_text'=>$req->btn_text,
-                'link'=>$req->link,
-                'status'=>$req->status,
-            ]);
-            if($banner){
-                return response()->json([
+        $validator=Validator::make($req->all(),[
+                            'name'=>'required|unique:variations'
+        ]);
+
+        if($validator->passes()){
+            Variation::create([
+                'name'=>strtolower($req->name),
+            ]); 
+              return response()->json([
                     'status'=>true,
-                    'message'=>'Banner Created Successfully',
-                    'banner'=>$banner,
+                    'message'=>'Variation Created Successfully',
+                    'variation'=>$validator,
                 ]);
-            }else{
-                  return response()->json([
+        }else{
+                return response()->json([
                     'status'=>false,
-                    'message'=>'Banner did not created',
-                    'banner'=>[]
+                     'error'=>$validator->errors(),
                 ]);
-            }
-            
-        // } catch (\Throwable $th) {
-        //    abort(404,'Something went wronge');
-        // }
+        }
+    }
+      public function valuestore(Request $req){
+        // dd($req->all());
+        // try {
+        $validator=Validator::make($req->all(),[
+            'variation_id'=>'required',
+            'value'=>'required|unique:variation_values'
+        ]);
+
+        if($validator->passes()){
+            VariationValues::create([
+                'variation_id'=>$req->variation_id,
+                'value'=>strtolower($req->value),
+            ]); 
+              return response()->json([
+                    'status'=>true,
+                    'message'=>'Value  Created Successfully',
+                    'variation'=>$validator,
+                ]);
+        }else{
+                return response()->json([
+                    'status'=>false,
+                     'error'=>$validator->errors(),
+                ]);
+        }
+    }
+    public function valdestroy(Request $req){
+        $variationvalue=VariationValues::where('id',$req->id)->delete();
+       return response()->json([
+        'status'=>true,
+        'message'=>'Variation Value deleted successfully'
+       ]);
+       
     }
     public function destroy(Request $req){    
         // dd($req->all());

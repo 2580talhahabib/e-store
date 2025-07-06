@@ -23,5 +23,10 @@
                          <span class="fa fa-list-alt mr-3"></span> Categories
                    </a>
                  </li>
+				  <li class="{{ request()->routeIs('admin.variation') ? 'bg-success' : '' }}">
+                   <a class="" href="{{ route('admin.variation') }}">
+                         <span class="fa fa-list-alt mr-3"></span> Variations
+                   </a>
+                 </li>
 				</ul>
 			</nav>

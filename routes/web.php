@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AppController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\VariationController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\IndexController;
@@ -71,4 +72,12 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
     Route::post("/admin/banner/store",[BannerController::class ,'store'])->name('admin.banner.store');
     Route::post("/admin/banner/update",[BannerController::class ,'update'])->name('admin.banner.update');
     Route::Delete("/admin/banner/delete",[BannerController::class ,'destroy'])->name('admin.banner.delete');
+
+       //  Variation Controller 
+    Route::get("/admin/variation",[VariationController::class ,'index'])->name('admin.variation');
+    Route::post("/admin/variation/store",[VariationController::class ,'store'])->name('admin.variation.store');
+    Route::post("/admin/valuestore/store",[VariationController::class ,'valuestore'])->name('admin.valuestore.store');
+    Route::post("/admin/variation/update",[VariationController::class ,'update'])->name('admin.variation.update');
+    Route::Delete("/admin/variation/delete",[VariationController::class ,'destroy'])->name('admin.variation.delete');
+    Route::Delete("/admin/valdestroy/delete",[VariationController::class ,'valdestroy'])->name('admin.valdestroy.delete');
 });
