@@ -4,7 +4,11 @@ use App\Models\AppData;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Menu;
+use App\Models\Variation;
 
+function test(){
+    return "Helper is working well";
+}
 function getdata(){
     return AppData::get();
 }
@@ -13,6 +17,7 @@ function getmanu($position){
        return Menu::with('children')->where('position',$position)
                   ->whereNull('parent_id')->orderby('id') // Only get parent menus
                   ->get();
+                  
         return $menus;
     } catch (\Throwable $th) {
         return [];
@@ -28,11 +33,23 @@ function getmanu($position){
     }
    
 }
- function getbanners(){
+if(!function_exists('getbanners')){
+     function getbanners(){
     try {
        $banners=Banner::where('status',1)->get();
        return $banners;
     } catch (\Throwable $th) {
         return [];
     }
+    }
+}
+
+
+    function getvariations(){
+        try {
+                  $variations=Variation::with('value')->get();
+                  return $variations;
+        } catch (\Throwable $th) {
+           return [];
+        }
     }

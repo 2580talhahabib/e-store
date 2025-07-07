@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AppController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\VariationController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -80,4 +81,13 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
     Route::post("/admin/variation/update",[VariationController::class ,'update'])->name('admin.variation.update');
     Route::Delete("/admin/variation/delete",[VariationController::class ,'destroy'])->name('admin.variation.delete');
     Route::Delete("/admin/valdestroy/delete",[VariationController::class ,'valdestroy'])->name('admin.valdestroy.delete');
+
+
+    
+      //  Product Controller 
+    Route::get("/admin/product",[ProductController::class ,'index'])->name('admin.product');
+    Route::post("/admin/product/store",[ProductController::class ,'store'])->name('admin.product.store');
+    Route::post("/admin/product/update",[ProductController::class ,'update'])->name('admin.product.update');
+    Route::Delete("/admin/product/delete",[ProductController::class ,'destroy'])->name('admin.product.delete');
+
 });

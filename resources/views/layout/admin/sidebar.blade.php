@@ -1,4 +1,9 @@
 	<nav id="sidebar"  >
+            	<div class="{{ request()->routeIs('admin.dashboard') ? 'text-success' : '' }} my-3 ml-5">
+                   <a  href="{{ route('admin.dashboard') }}"  >
+                         Hi Admin
+                   </a>
+                 </div>
 				<div class="custom-menu">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary">
 					  <i class="fa fa-bars"></i>
@@ -26,6 +31,11 @@
 				  <li class="{{ request()->routeIs('admin.variation') ? 'bg-success' : '' }}">
                    <a class="" href="{{ route('admin.variation') }}">
                          <span class="fa fa-list-alt mr-3"></span> Variations
+                   </a>
+                 </li>
+                 	  <li class="{{ request()->routeIs('admin.product') ? 'bg-success' : '' }}">
+                   <a class="" href="{{ route('admin.product') }}">
+                         <span class="fa fa-shopping-bag mr-3"></span> Prodcuts
                    </a>
                  </li>
 				</ul>
