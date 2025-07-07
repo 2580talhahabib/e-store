@@ -90,4 +90,8 @@ Route::middleware(['OnlyAuthenticated','OnlyAdmin'])->group(function () {
     Route::post("/admin/product/update",[ProductController::class ,'update'])->name('admin.product.update');
     Route::Delete("/admin/product/delete",[ProductController::class ,'destroy'])->name('admin.product.delete');
 
+    // category change controller 
+    Route::get("/product/childcategory/",[ProductController::class ,'childcategory'])->name('product.childcategory');
+    
+
 });

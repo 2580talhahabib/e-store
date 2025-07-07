@@ -26,6 +26,7 @@ function getmanu($position){
  function getcategories(){
     try {
        $categories=Category::with('parent')->whereNull('parent_id')->get();
+       
        return $categories;
        
     } catch (\Throwable $th) {
